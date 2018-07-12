@@ -59,7 +59,7 @@ describe('end-to-end', function() {
       writeJsonSync(path.join('package', 'package.json'), packageJson);
 
       // Save modified package back into tarball so we can have npm use that directly
-      return run('tar', ['-cf', 'ember-electron-cachebust.tar', 'package']);
+      return run('tar', ['-czf', 'ember-electron-cachebust.tgz', 'package']);
     });
   });
 
@@ -98,7 +98,7 @@ describe('end-to-end', function() {
       return ember('new', 'ee-test-app').then(() => {
         process.chdir('ee-test-app');
 
-        return ember('install', `ember-electron@file:${path.join(packageTmpDir, 'ember-electron-cachebust.tar')}`);
+        return ember('install', `ember-electron@file:${path.join(packageTmpDir, 'ember-electron-cachebust.tgz')}`);
       });
     });
 
