@@ -46,10 +46,8 @@ describe('end-to-end', function() {
       }
     });
 
-    //
     // Pack up current ember-electron directory so it can be installed in new
     // ember projects.
-    //
     return run('yarn', ['pack', '--filename', path.join(packageTmpDir, 'ember-electron.tgz')]).then(() => {
       process.chdir(packageTmpDir);
 
@@ -59,6 +57,9 @@ describe('end-to-end', function() {
       let packageJson = readJsonSync(path.join('package', 'package.json'));
       packageJson.version = `${packageJson.version}-${new Date().getTime()}`;
       writeJsonSync(path.join('package', 'package.json'), packageJson);
+
+      // Save modified package back into tarball so we can have npm use that directly
+      return run('tar', ['-cf', 'ember-electron-cachebust.tar', 'package']);
     });
   });
 
@@ -97,7 +98,7 @@ describe('end-to-end', function() {
       return ember('new', 'ee-test-app').then(() => {
         process.chdir('ee-test-app');
 
-        return ember('install', `ember-electron@file:${path.join(packageTmpDir, 'ember-electron.tgz')}`);
+        return ember('install', `ember-electron@file:${path.join(packageTmpDir, 'ember-electron-cachebust.tar')}`);
       });
     });
 
