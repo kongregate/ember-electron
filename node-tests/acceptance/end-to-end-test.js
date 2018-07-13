@@ -90,7 +90,7 @@ describe('end-to-end', function() {
     runTests();
   });
 
-  describe('with npm', function() {
+  describe.only('with npm', function() {
     before(function() {
       let { name: tmpDir } = tmp.dirSync();
       process.chdir(tmpDir);

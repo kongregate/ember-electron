@@ -13,11 +13,12 @@ cache:
 
 install:
   - ps: Install-Product node $env:nodejs_version $env:platform
+  - npm install npm@latest -g
   - npm install yarn -g
+  - npm cache clean --force
   - yarn --frozen-lockfile
 
 test_script:
-  - npm --version
   - yarn test
 
 build: off
