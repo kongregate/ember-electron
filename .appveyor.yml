@@ -17,6 +17,7 @@ install:
   - yarn --frozen-lockfile
 
 test_script:
+  - npm --version
   - yarn test
 
 build: off
