@@ -13,7 +13,7 @@ cache:
 
 install:
   - ps: Install-Product node $env:nodejs_version $env:platform
-  - npm install npm@latest -g
+  - npm install npm@5 -g
   - npm install yarn -g
   - npm cache clean --force
   - yarn --frozen-lockfile
