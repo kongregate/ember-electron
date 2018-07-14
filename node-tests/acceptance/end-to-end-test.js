@@ -100,7 +100,13 @@ describe('end-to-end', function() {
 
         return ember('install', `ember-electron@file:${path.relative(process.cwd(), path.join(packageTmpDir, 'ember-electron-cachebust.tgz'))}`);
       }).catch().then(() => {
+        console.log('grep');
+
         return run('grep', ['ember-electron', 'package.json']);
+      }).then(() => {
+        console.log('ls');
+
+        return run('ls', ['-ls', 'node_modules']);
       });
     });
 
