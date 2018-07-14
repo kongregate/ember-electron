@@ -104,9 +104,9 @@ describe('end-to-end', function() {
 
         return run('grep', ['ember-electron', 'package.json']);
       }).then(() => {
-        console.log('ls');
+        console.log('grep node modules');
 
-        return run('ls', ['-ls', 'node_modules']);
+        return run('grep', ['tgz', 'node_modules/ember-electron/package.json']);
       });
     });
 
